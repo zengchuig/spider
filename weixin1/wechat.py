@@ -179,7 +179,7 @@ def get_pagelist():
 
 def get_queue():
     
-    cs.execute('select id,url from {} where url is not Null and url!="" and id>=232;'.format(config.name))
+    cs.execute('select id,url from {} where url is not Null and url!="" and id>=1;'.format(config.name))
     content_q=Queue()
     all_data=cs.fetchall()
     for i in all_data:
