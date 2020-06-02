@@ -1,0 +1,1 @@
+sudo /opt/kafka_2.13-2.5.0/bin/kafka-topics.sh --create --zookeeper 127.0.0.1:2181 --replication-factor 1 --partitions 3 --topic test1 
