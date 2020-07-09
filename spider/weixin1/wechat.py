@@ -7,9 +7,10 @@ producer=KafkaProducer(
 bootstrap_servers=config.SERVER,
  value_serializer=lambda m: m.encode())
 
+
 headers={'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36 QBCore/4.0.1295.400 QQBrowser/9.0.2524.400 Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2875.116 Safari/537.36 NetType/WIFI MicroMessenger/7.0.5 WindowsWechat'}
 session=requests.session()
-conn=connect(host='192.168.43.35',port=3306,user='root',password='222',database='request',charset='utf8')
+conn=connect(host=config.host,port=config.port,user=config.user,password=config.password,database=config.database,charset=config.charset)
 
 @contextlib.contextmanager
 def mysql():
@@ -57,7 +58,7 @@ def date(timestamp):
     date = time.strftime("%Y-%m-%d", timeArray)
     return date
 
-# 将data整理，传给mysql字段--------------------------------------------
+# 将data整理，传给kafka--------------------------------------------
 def parse(data):
     for i in data['list']:
         content=i['comm_msg_info']['content']
@@ -73,7 +74,7 @@ def parse(data):
         else:
             SQL="insert into {}(content,time) values('{}','{}')".format(config.name,content,time)
             producer.send(config.TOPIC,SQL)
-    print(1)
+    print('获取一组----------------------------------')
 
 # 获取初始列表页，以及下拉列表页响应-------------------------------------
 def get_resp(url,params,_json=None):
@@ -178,7 +179,7 @@ def get_pagelist():
 
 def get_queue():
     
-    cs.execute('select id,url from {} where url is not Null and url!="" and id>=232;'.format(config.name))
+    cs.execute('select id,url from {} where url is not Null and url!="" and id>=1;'.format(config.name))
     content_q=Queue()
     all_data=cs.fetchall()
     for i in all_data:

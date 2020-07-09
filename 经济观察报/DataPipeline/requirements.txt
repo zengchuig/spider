@@ -1,0 +1,12 @@
+redis
+ngender
+celery==4.4.0
+baidu-aip
+tencentcloud-sdk-python
+uvicorn
+fastapi
+pydantic
+pyhanlp
+pprint
+distance
+aliyun_table

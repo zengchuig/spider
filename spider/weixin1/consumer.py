@@ -2,7 +2,7 @@ import config,contextlib
 from pymysql import connect
 from kafka import KafkaConsumer
 
-conn=connect(host='192.168.43.35',port=3306,user='root',password='222',database='request',charset='utf8')
+conn=connect(host=config.host,port=config.port,user=config.user,password=config.password,database=config.database,charset=config.charset)
 @contextlib.contextmanager
 def mysql():
     cs=conn.cursor()

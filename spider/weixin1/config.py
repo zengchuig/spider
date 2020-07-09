@@ -1,8 +1,20 @@
+# 定义存储数据的table名字
 name='yckjpl'
+
 # 是否需要获取文章url
 pagelist=False
+
+# kafka配置
 SERVER='localhost'
 TOPIC='test1'
+
+# mysql配置
+host='192.168.43.35'
+port=3306
+user='root'
+password='222'
+database='request'
+charset='utf8'
 
 sql="""
 CREATE TABLE if not exists {}(
@@ -20,18 +32,13 @@ CREATE TABLE if not exists {}(
 )ENGINE=InnoDB;
 """.format(name)
 
+sql1="""
+CREATE TABLE if not exists req (
+  id smallint unsigned NOT NULL AUTO_INCREMENT,
+  params text,
+  cookie text,
+  appmsg_token varchar(160) DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8"""
 
-# import contextlib
-# @contextlib.contextmanager
-# def aa():
-# 	try:
-# 		yield 15
-# 	finally:
-# 		print(2)
-# with aa() as l:
-# 	print(l)
-# 	def a():
-# 		print(3)
-# 		pass
-# 	a()
 
