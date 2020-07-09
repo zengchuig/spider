@@ -1,1 +1,0 @@
-sudo /opt/kafka_2.13-2.5.0/bin/kafka-server-start.sh /opt/kafka_2.13-2.5.0/config/server.properties
